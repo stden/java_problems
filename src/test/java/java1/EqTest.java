@@ -3,6 +3,10 @@ package java1;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.io.*;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -10,6 +14,11 @@ import static java.lang.Math.abs;
 
 public class EqTest extends Assert {
     private Random rnd = new Random();
+
+    private static String fileToStr(String path) throws IOException {
+        byte[] encoded = Files.readAllBytes(Paths.get(path));
+        return new String(encoded, Charset.forName("UTF-8")).trim();
+    }
 
     @Test
     public void testSample() {
@@ -31,7 +40,7 @@ public class EqTest extends Assert {
     // Генератор тестов для задачи
     private void gen(int t) {
         // d - digits - количество знаков после '.'
-        System.out.println("Test " + t);
+        System.out.printf("Test %02d%n", t);
         int d = 10;
         if (t > 5) d = 100;
         if (t > 8) d = 1000;
@@ -84,5 +93,30 @@ public class EqTest extends Assert {
     // Случайные числа в пределах: 0..bound
     private long random(long bound) {
         return Math.abs(rnd.nextLong()) % (bound + 1);
+    }
+
+    @Test
+    public void testFiles() throws IOException {
+        String dir = "tests/eq";
+        String inFileName = String.format("%s/%02d", dir, 1);
+        String ansFileName = String.format("%s/%02d.a", dir, 1);
+        System.out.printf("%s => %s%n", inFileName, ansFileName);
+
+        // Save input/output
+        InputStream saveIn = System.in;
+        PrintStream saveOut = System.out;
+
+        System.setIn(new FileInputStream(inFileName));
+        ByteArrayOutputStream s = new ByteArrayOutputStream();
+        try (PrintStream ps = new PrintStream(s)) {
+            System.setOut(ps);
+            Eq.main(new String[]{});
+        }
+        String output = s.toString().trim();
+        assertEquals("NO", output);
+        assertEquals(fileToStr(ansFileName), output);
+
+        System.setIn(saveIn);
+        System.setOut(saveOut);
     }
 }
