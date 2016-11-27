@@ -1,0 +1,114 @@
+import org.junit.Assert;
+import org.junit.Test;
+
+public class RomanTest extends Assert {
+
+    @Test
+    public void testHex() {
+        assertEquals("I", Roman.toRoman(1));
+        assertEquals("II", Roman.toRoman(2));
+        assertEquals("III", Roman.toRoman(3));
+        assertEquals("IV", Roman.toRoman(4));
+        assertEquals("V", Roman.toRoman(5));
+        assertEquals("VI", Roman.toRoman(6));
+        assertEquals("VII", Roman.toRoman(7));
+        assertEquals("VIII", Roman.toRoman(8));
+        assertEquals("IX", Roman.toRoman(9));
+        assertEquals("X", Roman.toRoman(10));
+        assertEquals("XI", Roman.toRoman(11));
+        assertEquals("XII", Roman.toRoman(12));
+        assertEquals("XIII", Roman.toRoman(13));
+        assertEquals("XIV", Roman.toRoman(14));
+        assertEquals("XV", Roman.toRoman(15));
+        assertEquals("XVI", Roman.toRoman(16));
+        assertEquals("XVII", Roman.toRoman(17));
+        assertEquals("XVIII", Roman.toRoman(18));
+        assertEquals("XIX", Roman.toRoman(19));
+        assertEquals("XX", Roman.toRoman(20));
+        assertEquals("XXI", Roman.toRoman(21));
+        assertEquals("XXII", Roman.toRoman(22));
+        assertEquals("XXIII", Roman.toRoman(23));
+        assertEquals("XXIV", Roman.toRoman(24));
+        assertEquals("XXV", Roman.toRoman(25));
+        assertEquals("XXVI", Roman.toRoman(26));
+        assertEquals("XXVII", Roman.toRoman(27));
+        assertEquals("XXVIII", Roman.toRoman(28));
+        assertEquals("XXIX", Roman.toRoman(29));
+        assertEquals("XXX", Roman.toRoman(30));
+        assertEquals("XXXI", Roman.toRoman(31));
+        assertEquals("XXXII", Roman.toRoman(32));
+        assertEquals("XXXIII", Roman.toRoman(33));
+        assertEquals("XXXIV", Roman.toRoman(34));
+        assertEquals("XXXV", Roman.toRoman(35));
+        assertEquals("XXXVI", Roman.toRoman(36));
+        assertEquals("XXXVII", Roman.toRoman(37));
+        assertEquals("XXXVIII", Roman.toRoman(38));
+        assertEquals("XXXIX", Roman.toRoman(39));
+        assertEquals("XL", Roman.toRoman(40));
+        assertEquals("XLI", Roman.toRoman(41));
+        assertEquals("XLII", Roman.toRoman(42));
+        assertEquals("XLIII", Roman.toRoman(43));
+        assertEquals("XLIV", Roman.toRoman(44));
+        assertEquals("XLV", Roman.toRoman(45));
+        assertEquals("XLVI", Roman.toRoman(46));
+        assertEquals("XLVII", Roman.toRoman(47));
+        assertEquals("XLVIII", Roman.toRoman(48));
+        assertEquals("XLIX", Roman.toRoman(49));
+        assertEquals("L", Roman.toRoman(50));
+        assertEquals("LI", Roman.toRoman(51));
+        assertEquals("LII", Roman.toRoman(52));
+        assertEquals("LIII", Roman.toRoman(53));
+        assertEquals("LIV", Roman.toRoman(54));
+        assertEquals("LV", Roman.toRoman(55));
+        assertEquals("LVI", Roman.toRoman(56));
+        assertEquals("LVII", Roman.toRoman(57));
+        assertEquals("LVIII", Roman.toRoman(58));
+        assertEquals("LIX", Roman.toRoman(59));
+        assertEquals("LX", Roman.toRoman(60));
+        assertEquals("LXI", Roman.toRoman(61));
+        assertEquals("LXII", Roman.toRoman(62));
+        assertEquals("LXIII", Roman.toRoman(63));
+        assertEquals("LXIV", Roman.toRoman(64));
+        assertEquals("LXV", Roman.toRoman(65));
+        assertEquals("LXVI", Roman.toRoman(66));
+        assertEquals("LXVII", Roman.toRoman(67));
+        assertEquals("LXVIII", Roman.toRoman(68));
+        assertEquals("LXIX", Roman.toRoman(69));
+        assertEquals("LXX", Roman.toRoman(70));
+        assertEquals("LXXI", Roman.toRoman(71));
+        assertEquals("LXXII", Roman.toRoman(72));
+        assertEquals("LXXIII", Roman.toRoman(73));
+        assertEquals("LXXIV", Roman.toRoman(74));
+        assertEquals("LXXV", Roman.toRoman(75));
+        assertEquals("LXXVI", Roman.toRoman(76));
+        assertEquals("LXXVII", Roman.toRoman(77));
+        assertEquals("LXXVIII", Roman.toRoman(78));
+        assertEquals("LXXIX", Roman.toRoman(79));
+        assertEquals("LXXX", Roman.toRoman(80));
+        assertEquals("LXXXI", Roman.toRoman(81));
+        assertEquals("LXXXII", Roman.toRoman(82));
+        // 100
+        assertEquals("XCIX", Roman.toRoman(99));
+        assertEquals("C", Roman.toRoman(100));
+        assertEquals("CI", Roman.toRoman(101));
+        // 500
+        assertEquals("CDXCVIII", Roman.toRoman(498));
+        assertEquals("CDXCIX", Roman.toRoman(499));
+        assertEquals("D", Roman.toRoman(500));
+        assertEquals("DI", Roman.toRoman(501));
+        assertEquals("DII", Roman.toRoman(502));
+        // 1000
+        assertEquals("CMXCVIII", Roman.toRoman(998));
+        assertEquals("CMXCIX", Roman.toRoman(999));
+        assertEquals("M", Roman.toRoman(1000));
+        assertEquals("MI", Roman.toRoman(1001));
+        assertEquals("MII", Roman.toRoman(1002));
+        // 1703
+        assertEquals("MDCCIII", Roman.toRoman(1703));
+
+        assertEquals("MMXIII", Roman.toRoman(2013));
+        assertEquals("MMXIV", Roman.toRoman(2014));
+        assertEquals("MMXV", Roman.toRoman(2015));
+        assertEquals("MMXVI", Roman.toRoman(2016));
+    }
+}
