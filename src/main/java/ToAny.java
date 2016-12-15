@@ -11,23 +11,23 @@ public class ToAny {
     }
 
     /**
-     * @param x    число в десятичной системе счисления
-     * @param base основание системы счисления
-     * @return x в системе счисления base
+     * @param x     число в десятичной системе счисления
+     * @param radix основание системы счисления
+     * @return x в системе счисления radix
      */
-    static String toAny(long x, int base) {
-        if (base < 2 || base > 36)
-            throw new IllegalArgumentException("base = " + base + "  [2..36]");
-        if (x == 0)
-            return "0";
-        String s = "";
-        while (x > 0) {
-            int d = (int) (x % base);
-            s = Character.forDigit(d, base) + s;
-            x /= base;
-        }
+    static String toAny(long x, int radix) {
+        // Проверяем ограничения
+        if (x < 0)
+            throw new IllegalArgumentException("x = " + x + " < 0");
+        if (radix < 2 || radix > 36)
+            throw new IllegalArgumentException("radix = " + radix + "  [2..36]");
+        String s = ""; // Сюда поместим результат
+        do {
+            int digit = (int) (x % radix); // Цифра числа
+            // Для перевода одной цифры можно написать свою функцию или использовать стандартную
+            s = Character.forDigit(digit, radix) + s; // Добавяем её в результат
+            x /= radix;
+        } while (x > 0);
         return s.toUpperCase();
     }
-
-
 }

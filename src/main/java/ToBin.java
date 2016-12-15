@@ -1,3 +1,7 @@
+// Задача "В двоичную систему счисления"
+// Дано число в десятичной системе счисления,
+// нужно вывести его в двоичной системе счисления.
+
 import java.util.Scanner;
 
 public class ToBin {
@@ -14,7 +18,15 @@ public class ToBin {
      * @return x в двоичной системе счисления
      */
     static String toBin(long x) {
-        return Long.toBinaryString(x);
+        String s = ""; // Число в двоичной системе счисления
+        do {
+            s = (x % 2) + s; // Очередно двоичный разряд
+            x /= 2; // Делим число на 2
+        } while (x > 0);
+        return s;
     }
 
+    static String toBin2(long x) {
+        return Long.toBinaryString(x);
+    }
 }

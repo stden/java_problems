@@ -23,7 +23,9 @@ public class Main {
         try {
             String s = args[0];
             System.out.printf("Строка для проверки: '%s'%n", s);
-            System.out.println(isValid(s) ? "  -- валидная" : "  -- невалидная");
+            BracketsParser.Result result = isValid(s);
+            System.out.println(result.isValid ? "  -- валидная" : "  -- невалидная");
+            System.out.println(result.toString());
         } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
         }

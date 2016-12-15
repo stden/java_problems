@@ -1,8 +1,49 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Roman {
-    private static int[] numbers = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
-    private static String[] strings = {"I", "IV", "V", "IX", "X", "XL", "L", "XC", "C", "CD", "D", "CM", "M"};
+    // Все соответствия добавим в массив
+    private static ArrayList<RN> romans = new ArrayList<>();
+
+    static {
+        int I = 1;
+        romans.add(new RN("I", I));      // 1
+        int V = 5;
+        romans.add(new RN("IV", V - I)); // 4
+        romans.add(new RN("V", V));      // 5
+        int X = 10;
+        romans.add(new RN("IX", X - I)); // 9
+        romans.add(new RN("X", X));      // 10
+        int L = 50;
+        romans.add(new RN("XL", L - X)); // 40
+        romans.add(new RN("L", L));      // 50
+        int C = 100;
+        romans.add(new RN("XC", C - X)); // 90
+        romans.add(new RN("C", C));      // 100
+        int D = 500;
+        romans.add(new RN("CD", D - C)); // 400
+        romans.add(new RN("D", D));      // 500
+        int M = 1000;
+        romans.add(new RN("CM", M - C)); // 900
+        romans.add(new RN("M", M));      // 1000
+        // Сортируем по убыванию, сначала большие
+        romans.sort((a, b) -> b.value - a.value);
+    }
+
+    /**
+     * @param x число в десятичной системе счисления
+     * @return x число в римской системе счисления
+     */
+    static String toRoman(int x) {
+        String roman = "";
+        for (RN r : romans) {
+            while (r.value <= x) {
+                x -= r.value;
+                roman += r.roman;
+            }
+        }
+        return roman;
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -12,18 +53,15 @@ public class Roman {
         }
     }
 
-    /**
-     * @param x число в десятичной системе счисления
-     * @return x число в римской системе счисления
-     */
-    static String toRoman(int x) {
-        String roman = "";
-        for (int k = numbers.length - 1; k >= 0; k--) {
-            while (numbers[k] <= x) {
-                x -= numbers[k];
-                roman += strings[k];
-            }
+    // Соответствие числа в римской и в десятичной системе счисления
+    static class RN {
+        String roman; // Число в римской
+        int value; // Число в десятичной
+
+        // Конструктор для удобного создания
+        RN(String roman, int value) {
+            this.roman = roman;
+            this.value = value;
         }
-        return roman;
     }
 }

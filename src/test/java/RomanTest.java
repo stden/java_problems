@@ -4,7 +4,7 @@ import org.junit.Test;
 public class RomanTest extends Assert {
 
     @Test
-    public void testHex() {
+    public void testRomans() {
         assertEquals("I", Roman.toRoman(1));
         assertEquals("II", Roman.toRoman(2));
         assertEquals("III", Roman.toRoman(3));

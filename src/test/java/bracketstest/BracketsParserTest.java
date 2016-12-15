@@ -1,5 +1,6 @@
-package brackets;
+package bracketstest;
 
+import brackets.BracketsParser;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,10 +16,10 @@ public class BracketsParserTest extends Assert {
     @Test
     public void testSample() {
         // Валидные строки "{{}}[]" или "[{}{}]"
-        assertTrue(BracketsParser.isValid("{{}}[]"));
-        assertTrue(BracketsParser.isValid("[{}{}]"));
+        assertTrue(BracketsParser.isValid("{{}}[]").isValid);
+        assertTrue(BracketsParser.isValid("[{}{}]").isValid);
         // Невалидные "{[}]"
-        assertFalse(BracketsParser.isValid("{[}]"));
+        assertFalse(BracketsParser.isValid("{[}]").isValid);
     }
 
     /**
@@ -54,8 +55,7 @@ public class BracketsParserTest extends Assert {
         }
         assertEquals(pairs, open);
         assertEquals(pairs, close);
-        BracketsParser.setPrintResult(false);
-        assertTrue(BracketsParser.isValid(builder.toString()));
+        assertTrue(BracketsParser.isValid(builder.toString()).isValid);
     }
 
     /**
@@ -63,10 +63,11 @@ public class BracketsParserTest extends Assert {
      */
     @Test
     public void testInvalidNoClose() {
-        assertFalse(BracketsParser.isValid("{"));
-        assertFalse(BracketsParser.isValid("[["));
-        assertFalse(BracketsParser.isValid("((("));
-        assertFalse(BracketsParser.isValid("{}{[]"));
+        assertFalse(BracketsParser.isValid("{").isValid);
+        assertEquals("Нет закрывающей '}' для '{' в позиции 0", BracketsParser.isValid("{").toString());
+        assertEquals("Нет закрывающей ']' для '[' в позиции 1", BracketsParser.isValid("[[").toString());
+        assertEquals("Нет закрывающей ')' для '(' в позиции 2", BracketsParser.isValid("(((").toString());
+        assertEquals("Нет закрывающей '}' для '{' в позиции 2", BracketsParser.isValid("{}{[]").toString());
     }
 
     /**
@@ -74,10 +75,10 @@ public class BracketsParserTest extends Assert {
      */
     @Test
     public void testInvalidNoOpen() {
-        assertFalse(BracketsParser.isValid("[]]"));
-        assertFalse(BracketsParser.isValid("[]}"));
-        assertFalse(BracketsParser.isValid(")"));
-        assertFalse(BracketsParser.isValid("()(()())]"));
+        assertFalse(BracketsParser.isValid("[]]").isValid);
+        assertEquals("Нет открывающей скобки для '}' в позиции 2", BracketsParser.isValid("[]}").toString());
+        assertEquals("Нет открывающей скобки для ')' в позиции 0", BracketsParser.isValid(")").toString());
+        assertEquals("Нет открывающей скобки для ']' в позиции 8", BracketsParser.isValid("()(()())]").toString());
     }
 
     /**
@@ -85,16 +86,16 @@ public class BracketsParserTest extends Assert {
      */
     @Test
     public void testInvalidMismatch() {
-        assertFalse(BracketsParser.isValid("{[}]"));
-        assertFalse(BracketsParser.isValid("{]"));
-        assertFalse(BracketsParser.isValid("(}}"));
+        assertFalse(BracketsParser.isValid("{[}]").isValid);
+        assertEquals("'{]' закрывающая ']' в 1 не соответствует открывающей '{' в 0", BracketsParser.isValid("{]").toString());
+        assertEquals("'(}}' закрывающая '}' в 1 не соответствует открывающей '(' в 0", BracketsParser.isValid("(}}").toString());
     }
 
     /**
      * Неверные символы в строке
      */
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void testWrongSymbol() {
-        BracketsParser.isValid("{x}");
+        assertEquals("Неверный символ x в позиции 1", BracketsParser.isValid("{x}").toString());
     }
 }

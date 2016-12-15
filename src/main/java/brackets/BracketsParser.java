@@ -13,13 +13,11 @@ public class BracketsParser {
         put('(', ')'); // Круглые скобки
     }};
 
-    private static boolean printResult = true;
-
     /**
      * @param s Строка со скобками для проверки
      * @return Является ли строка скобок валидной?
      */
-    public static boolean isValid(String s) {
+    public static Result isValid(String s) {
         // Стек для проверки корректности скобочной последовательности
         Stack<BracketPair> stack = new Stack<>();
         // Список с результатами
@@ -32,8 +30,7 @@ public class BracketsParser {
             } else if (types.containsValue(c)) {
                 // Если в стеке ничего нет => невалидная последовательсность
                 if (stack.isEmpty()) {
-                    System.out.printf("Нет открывающей скобки для '%s' в позиции %d%n", c, i);
-                    return false;
+                    return new Result(String.format("Нет открывающей скобки для '%s' в позиции %d", c, i));
                 }
                 // Получаем открывающую скобку
                 BracketPair pair = stack.pop();
@@ -41,9 +38,8 @@ public class BracketsParser {
                 char open = pair.open; // Открывающая скобка
                 char expected = types.get(open); // Ожидаемая закрывающая
                 if (c != expected) {
-                    System.out.printf("'%s' закрывающая '%s' в %d не соответствует открывающей '%s' в %d%n",
-                            s, c, i, open, pair.openPos);
-                    return false;
+                    return new Result(String.format("'%s' закрывающая '%s' в %d не соответствует открывающей '%s' в %d",
+                            s, c, i, open, pair.openPos));
                 }
                 // Сохраняем информацию о закрывающей скобке
                 pair.closePos = i;
@@ -51,29 +47,45 @@ public class BracketsParser {
                 // Добавляем в список для вывода если последовательность валидная
                 list.add(pair);
             } else {
-                String msg = String.format("Неверный символ %s в позиции %d", c, i);
-                System.out.println(msg);
-                throw new IllegalArgumentException(msg);
+                return new Result(String.format("Неверный символ %s в позиции %d", c, i));
             }
         }
         // Проверяем баланс скобок
         if (!stack.isEmpty()) {
             BracketPair p = stack.pop();
-            System.out.printf("Нет закрывающей '%s' для '%s' в позиции %d%n", types.get(p.open), p.open, p.openPos);
-            return false;
+            return new Result(String.format("Нет закрывающей '%s' для '%s' в позиции %d", types.get(p.open), p.open, p.openPos));
         }
         // Список всех скобок с позициями открывающей и закрывающей
-        if (printResult) {
-            System.out.println("Список всех скобок с позициями открывающей и закрывающей");
-            System.out.printf("для строки '%s'%n", s);
-            for (BracketPair p : list)
-                System.out.println(p);
-        }
-        return true;
+        return new Result(String.format("Список всех скобок с позициями открывающей и закрывающей для строки '%s'%n", s),
+                list);
     }
 
-    static void setPrintResult(boolean printResult) {
-        BracketsParser.printResult = printResult;
+    public static class Result {
+        public final boolean isValid;
+        private final String result;
+        private final List<BracketPair> list;
+
+        Result(String result) {
+            isValid = false;
+            this.result = result;
+            this.list = null;
+        }
+
+        Result(String result, List<BracketPair> list) {
+            isValid = true;
+            this.result = result;
+            this.list = list;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder(result);
+            if (list != null)
+                for (BracketPair p : list)
+                    sb.append(p).append(System.lineSeparator());
+            return sb.toString();
+        }
+
     }
 
     /**

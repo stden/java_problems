@@ -1,14 +1,25 @@
+// Тесты для задачи
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.Random;
+
 public class ToBinTest extends Assert {
+    @Test
+    public void testZero() {
+        assertEquals("0", ToBin.toBin(0));
+    }
 
     @Test
     public void testBin() {
-        assertEquals("0", ToBin.toBin(0));
         assertEquals("1", ToBin.toBin(1));
         assertEquals("10", ToBin.toBin(2));
         assertEquals("11", ToBin.toBin(3));
+    }
+
+    @Test
+    public void testBinFrom10() {
         assertEquals("1010", ToBin.toBin(10));
         assertEquals("1011", ToBin.toBin(11));
         assertEquals("1100", ToBin.toBin(12));
@@ -24,5 +35,14 @@ public class ToBinTest extends Assert {
         assertEquals("100000000000000000000000000000000000000000000000000",
                 ToBin.toBin(1L << 50));
         assertEquals("10110101", ToBin.toBin(0b10110101));
+    }
+
+    @Test
+    public void testCompare() {
+        Random gen = new Random();
+        for (int test = 0; test < 2000; test++) {
+            long x = Math.abs(gen.nextLong());
+            assertEquals(ToBin.toBin2(x), ToBin.toBin(x));
+        }
     }
 }
