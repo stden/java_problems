@@ -1,31 +1,25 @@
 package interview;
 
-import java.util.Stack;
-
 public class FootTest implements Runnable {
 
     private final String name;
-    Object foots = new Object();
+    private int count;
 
-    public FootTest(String name) {
+    private FootTest(String name) {
         this.name = name;
+        count = 0;
     }
 
     public static void main(String[] args) {
-        Stack<String> stack = new Stack<>();
-        stack.push("1");
-        stack.push("2");
-        System.out.println(stack.pop());
-        System.out.println(stack.pop());
-        System.out.println(stack.isEmpty());
-
         new Thread(new FootTest("left")).start();
         new Thread(new FootTest("right")).start();
     }
 
     @Override
     public void run() {
-        while (true) {
+        // В оригинале был бесконечный цикл while(true),
+        // но я решил что лучше чтобы цикл кончался когда-нибудь :)
+        for (int i = 0; i < 100000; i++) {
             try {
                 step();
             } catch (InterruptedException e) {
@@ -35,10 +29,12 @@ public class FootTest implements Runnable {
     }
 
     private void step() throws InterruptedException {
-        synchronized (foots) {
-            System.out.println("Step " + name);
-            foots.wait();
-            foots.notify();
+        synchronized (FootTest.class) {
+            System.out.println("Step " + name + " #" + (++count));
+            // Пробуждаем остальные потоки
+            FootTest.class.notify();
+            // Сами становимся в очередь
+            FootTest.class.wait();
         }
     }
 }
