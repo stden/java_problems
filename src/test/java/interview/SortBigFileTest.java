@@ -58,8 +58,8 @@ public class SortBigFileTest extends Assert {
 
     @Test
     public void testSortAndCheck() throws FileNotFoundException, UnsupportedEncodingException {
-        final int TOTAL_SIZE = 1000 + gen.nextInt(1000); // Суммарный размер массива
-        final int PART = 100 + gen.nextInt(100); // Один маленький кусочек который мы будем сортировать в памяти
+        final int TOTAL_SIZE = 100000 + gen.nextInt(1000); // Суммарный размер массива
+        final int PART = 10000 + gen.nextInt(100); // Один маленький кусочек который мы будем сортировать в памяти
         assertTrue("Часть должна быть меньше целого", PART < TOTAL_SIZE);
         File bigFile = new File("work/bigFile.txt");
         // Большой массив для проверки правильности работы

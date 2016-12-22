@@ -8,6 +8,9 @@ import org.junit.Test;
  */
 public class LuckyTicketsTest extends Assert {
 
+    /**
+     * Позитивные тесты
+     */
     @Test
     public void testPositive() {
         assertTrue(isMyTicketLucky("123213"));
@@ -31,7 +34,7 @@ public class LuckyTicketsTest extends Assert {
     }
 
     /**
-     * Является ли билет счастливым?
+     * Является ли билет счастливым? Длина номера билета должна быть чётной
      *
      * @param number номер билета
      * @return true - если является
@@ -41,9 +44,9 @@ public class LuckyTicketsTest extends Assert {
         if (number.isEmpty() || (number.length() % 2 != 0))
             throw new IllegalArgumentException("Номер не должен быть пустым и длина номера должна быть чётна " + number);
         int n = number.length() / 2; // Половина длины номера
-        // Суммы цфир половинок номера
-        int left = 0;
-        int right = 0;
+        // Суммы цифр половинок номера
+        int left = 0; // Сумма цифр левой половины
+        int right = 0; // Сумма цифр правой половины
         for (int i = 0; i < n; i++) {
             left += number.charAt(i);
             right += number.charAt(i + n);

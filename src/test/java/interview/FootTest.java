@@ -1,5 +1,10 @@
 package interview;
 
+/**
+ * Есть 2 ноги - 2 класса FootTest implements Runnable: left и right (левая и правая нога).
+ * У них в бесконечном цикле выполняется операция step (один шаг), надо их синхронизировать чтобы было строгое
+ * чередование: левой-правой-левой-правой
+ */
 public class FootTest implements Runnable {
 
     private final String name;

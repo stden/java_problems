@@ -102,6 +102,9 @@ public class Sums3Test extends Assert {
         }
     }
 
+    /**
+     * Лобовое решение для проверки корректности остальных решений
+     */
     private int bruteForce(int[] a, int[] b, int[] c, int x) {
         int count = 0;
         for (int ax : a)

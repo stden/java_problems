@@ -7,7 +7,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.*;
 
 /**
- * Утилиты для работы с файлами
+ * Утилиты для работы с массивами целых чисел и файлами
  */
 public class IntArrayUtils {
     private static final boolean DEBUG = false;

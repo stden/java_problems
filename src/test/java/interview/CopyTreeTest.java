@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
 
+/**
+ * Скопировать одно двоичное дерево во второе (усложнение: не использовать рекурсию для обхода дерева)
+ */
 public class CopyTreeTest extends Assert {
     private TreeCopy rec, it;
 
@@ -137,12 +140,18 @@ public class CopyTreeTest extends Assert {
         }
     }
 
+    /**
+     * Узлы конечного дерева
+     */
     private static class ZNode {
         int value;
         ZNode left;
         ZNode right;
     }
 
+    /**
+     * Узлы исходного дерева
+     */
     private static class Node {
         int value;
         Node left;
