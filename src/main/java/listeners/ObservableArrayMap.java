@@ -1,13 +1,10 @@
 package listeners;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public abstract class ObservableArrayMap {
     Collection<Listener> listeners;
-    Map<byte[], byte[]> valueMap = new HashMap<byte[], byte[]>();
+    Map<List<Byte>, byte[]> valueMap = new HashMap<>();
 
     protected ObservableArrayMap() {
         listeners = createListenersContainer();
@@ -25,7 +22,7 @@ public abstract class ObservableArrayMap {
         listeners.remove(x);
     }
 
-    public synchronized void put(byte[] key, byte[] value) {
+    public synchronized void put(List<Byte> key, byte[] value) {
         byte[] oldValue = valueMap.put(key, value);
         if (hasChanges(oldValue, value)) {
             for (Listener x : listeners) {

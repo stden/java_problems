@@ -77,7 +77,7 @@ public class YamlTest extends Assert {
     @Test
     public void testChar() throws Exception {
         Yaml<Character> yaml = new Yaml<>("yaml/char.yml");
-        char c = (char) gen.nextInt();
+        char c = (char) (33 + gen.nextInt(128 - 33));
         yaml.save(c);
         assertEquals(c, yaml.load(Character.class).charValue());
     }
