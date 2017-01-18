@@ -27,7 +27,7 @@ public abstract class ObservableArrayMap {
 
     public synchronized void put(byte[] key, byte[] value) {
         byte[] oldValue = valueMap.put(key, value);
-        if (!hasChanges(oldValue, value)) {
+        if (hasChanges(oldValue, value)) {
             for (Listener x : listeners) {
                 x.onChange(key, value);
             }
