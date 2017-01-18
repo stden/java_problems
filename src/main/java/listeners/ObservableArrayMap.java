@@ -5,30 +5,30 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class observable_array_map {
-    Collection<_listener> listeners;
+public abstract class ObservableArrayMap {
+    Collection<Listener> listeners;
     Map<byte[], byte[]> valueMap = new HashMap<byte[], byte[]>();
 
-    protected observable_array_map() {
+    protected ObservableArrayMap() {
         listeners = createListenersContainer();
     }
 
-    protected Collection<_listener> createListenersContainer() {
-        return new ArrayList<_listener>();
+    protected Collection<Listener> createListenersContainer() {
+        return new ArrayList<Listener>();
     }
 
-    public synchronized void addListener(_listener x) {
+    public synchronized void addListener(Listener x) {
         listeners.add(x);
     }
 
-    public synchronized void removeListener(_listener x) {
+    public synchronized void removeListener(Listener x) {
         listeners.remove(x);
     }
 
     public synchronized void put(byte[] key, byte[] value) {
         byte[] oldValue = valueMap.put(key, value);
         if (!hasChanges(oldValue, value)) {
-            for (_listener x : listeners) {
+            for (Listener x : listeners) {
                 x.onChange(key, value);
             }
         }

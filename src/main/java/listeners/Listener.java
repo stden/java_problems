@@ -1,5 +1,5 @@
 package listeners;
 
-public interface _listener {
+public interface Listener {
     void onChange(byte[] key, byte[] value);
 }
