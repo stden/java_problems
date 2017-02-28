@@ -4,7 +4,7 @@ import org.junit.Test;
 public class ABCStringTest extends Assert {
 
     /**
-     * Given a text, find whether it contains the alphabet, in order, as subsequence
+     * Find whether it contains the alphabet, in order, as subsequence
      */
     @Test
     public void testABC() throws Exception {
@@ -13,19 +13,20 @@ public class ABCStringTest extends Assert {
     }
 
     /**
-     * Given a text find the shortest substring which contains the alphabet, in order, as subsequence
+     * Find shortest substring which contains the alphabet, in order, as subsequence
      * <pre>
-     * ,,a,,b,,c,a,d,b,,e,c,,,,,d,a,e,b,,c,,d,e,,,,,,,,,,,,,,,,,,,,,,,
+     * ..a..b..c.a.d.b..e.c.....d.a.e.b..c..d.e.......................
      *   |--|--|---|----|         |---|--|--|-|
      *           |---|----|-----|---|
      * </pre>
      */
     @Test
-    public void testxx() throws Exception {
-        shortestSubstring(",,a,,b,,c,a,d,b,,e,c,,,,,d,a,e,b,,c,,d,e,,,,,,,,,,,,,,,,,,,,,,,");
+    public void testAlphabetShortest() throws Exception {
+        assertEquals("Min length = 13 27..39", shortestAE("..a..b..c.a.d.b..e.c.....d.a.e.b..c..d.e......................."));
+        assertEquals("String doesn’t contains a..e", shortestAE("..a..e..b..c.a.d.b..c.....d.a.b..c..d......................."));
     }
 
-    private void shortestSubstring(String s) {
+    private String shortestAE(String s) {
         int minLength = Integer.MAX_VALUE;
         int minStart = -1, minEnd = -1;
         Pos[] pos = new Pos[26]; // 0..25
@@ -34,19 +35,19 @@ public class ABCStringTest extends Assert {
         for (int i = 0; i < s.length(); i++) {
             char c = s.charAt(i);
             if (c >= 'a' && c <= 'e') {
-                int idx = (int) (c - 'a');
+                int idx = c - 'a';
                 if (c == 'a') {
-                    pos[idx].start = i;
+                    pos[idx].posA = i;
                     pos[idx].end = i;
                 } else {
-                    if (pos[idx - 1].start != -1) {
-                        pos[idx].start = pos[idx - 1].start;
+                    if (pos[idx - 1].posA != -1) {
+                        pos[idx].posA = pos[idx - 1].posA;
                         pos[idx].end = i;
                         if (c == 'e') {
-                            int len = pos[idx].end - pos[idx].start + 1;
+                            int len = pos[idx].end - pos[idx].posA + 1;
                             if (len < minLength) {
                                 minLength = len;
-                                minStart = pos[idx].start;
+                                minStart = pos[idx].posA;
                                 minEnd = pos[idx].end;
                             }
                         }
@@ -55,9 +56,9 @@ public class ABCStringTest extends Assert {
             }
         }
         if (minLength == Integer.MAX_VALUE)
-            System.out.println("s - doesn’t contains a..z");
+            return "String doesn’t contains a..e";
         else
-            System.out.println("Answer = " + minLength + " from " + minStart + " to " + minEnd);
+            return "Min length = " + minLength + " " + minStart + ".." + minEnd;
     }
 
     private boolean containsAlphabetInOrder(String s) {
@@ -73,7 +74,7 @@ public class ABCStringTest extends Assert {
     }
 
     static class Pos {
-        int start = -1;
+        int posA = -1;
         int end = -1;
     }
 
