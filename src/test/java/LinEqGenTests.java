@@ -11,7 +11,7 @@ import static java.lang.Double.NaN;
 import static java.lang.Double.POSITIVE_INFINITY;
 import static java1.LinEq.solve;
 
-public class LinEqTest extends Assert {
+public class LinEqGenTests extends Assert {
     private static File inputDir = new File("work/lineq/input");
     private static File outputDir = new File("work/lineq/output");
     private int test;

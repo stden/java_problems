@@ -26,7 +26,6 @@ public class LinEq {
                 Double.isNaN(a) || Double.isNaN(b)) {
             return "Incorrect input";
         }
-        double x = -b / a;
-        return "x = " + (x + 0.0);
+        return "x = " + (-b / a);
     }
 }
