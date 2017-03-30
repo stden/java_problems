@@ -51,6 +51,7 @@ public class IntersectSymbolsSetsTest extends Assert {
     public void name() throws Exception {
         Character[] array = intersect("abcde", "abxdf");
         System.out.println(Arrays.toString(array));
+        intersect2("abcde", "abxdf");
     }
 
     @Test
@@ -66,11 +67,44 @@ public class IntersectSymbolsSetsTest extends Assert {
     }
 
     private Character[] intersect(String s1, String s2) {
+        // Получаем множество символов первой строки
         Set<Character> result = strToCharSet(s1);
+        // Пересекаем с множеством символов другой строки
         result.retainAll(strToCharSet(s2));
+        // Преобразуем в массив
         Character[] array = result.toArray(new Character[result.size()]);
+        // Сортируем массив символов для удобства восприятия
         Arrays.sort(array);
+        // Возвращаем массив
         return array;
     }
 
+    private void intersect2(String s1, String s2) {
+        // Какие символы есть в первой строке?
+        boolean[] exists1 = symbols(s1);
+        // Какие символы есть во второй строке?
+        boolean[] exists2 = symbols(s2);
+        // Получили 2 массива по 26 элементов
+        assertEquals(exists1.length, exists2.length);
+        // Пересекаем множества
+        for (int i = 0; i < exists1.length; i++)
+            if (exists1[i] && exists2[i])
+                System.out.print((char) (i + 'a') + " ");
+        System.out.println();
+    }
+
+    // Какие символы есть в строке s?
+    private boolean[] symbols(String s) {
+        // Есть ли символ с номером i в строке s?
+        boolean[] exists = new boolean[26]; // Сначала все false
+        // Пробегаем по всей строке от начала до конца
+        for (int i = 0; i < s.length(); i++) {
+            // Берём очередной символ
+            char c = s.charAt(i);
+            // Если символ находится в нужном диапазоне
+            if (c >= 'a' && c <= 'z')
+                exists[c - 'a'] = true;
+        }
+        return exists;
+    }
 }
