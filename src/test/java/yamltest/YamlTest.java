@@ -126,7 +126,8 @@ public class YamlTest extends Assert {
         Yaml<AllPrimitives> yaml = new Yaml<>("yaml/primitives.yml");
         yaml.save(e);
         AllPrimitives a = yaml.load(AllPrimitives.class);
-        assertEquals(e.publicInt, a.publicInt);
+
+        assertEquals("Read: " + a.toString(), e.publicInt, a.publicInt);
         assertEquals(e.protectedInt, a.protectedInt);
         assertEquals(e.getPrivateInt(), a.getPrivateInt());
         assertEquals(e.aByte, a.aByte);

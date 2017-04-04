@@ -1,12 +1,12 @@
 package yaml;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.lang.reflect.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 // Разбор и сохранение в текстовый файл на Yaml
 public class Yaml<T> {
@@ -21,7 +21,7 @@ public class Yaml<T> {
     public void save(T obj) throws FileNotFoundException, IllegalAccessException {
         File file = new File(fileName);
         file.getParentFile().mkdirs();
-        try (PrintWriter w = new PrintWriter(file)) {
+        try (PrintWriter w = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
             Class cls = obj.getClass();
             if (cls.isPrimitive() || simpleWrite(obj))
                 w.println(obj.toString());
@@ -57,7 +57,7 @@ public class Yaml<T> {
 
     @SuppressWarnings("unchecked")
     public T load(Class<T> cls) throws Exception {
-        try (Scanner sc = new Scanner(new File(fileName))) {
+        try (Scanner sc = new Scanner(new File(fileName), "UTF-8")) {
             sc.useLocale(Locale.ENGLISH);
             if (cls.equals(Byte.class))
                 return (T) new Byte(sc.nextByte());
