@@ -11,6 +11,7 @@ public class TasksTest {
         Task1 task1 = new Task1();
         assertEquals(" pleh em ", task1.solution(" help me "));
         assertEquals("ew tset sredoc", task1.solution("we test coders"));
+        assertEquals("", task1.solution("A"));
     }
 
     @Test
