@@ -12,7 +12,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <jmh.version>1.18</jmh.version>
+        <jmh.version>1.37</jmh.version>
     </properties>
 
     <!-- Зависимости: подключаю библиотеки -->
