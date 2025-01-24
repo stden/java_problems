@@ -19,7 +19,7 @@ public class Task1 {
         int start = -1; // Word start
         for (int end = 0; end < N; end++) {
             char c = s[end];
-            if (c >= 'a' && c <= 'z') {
+            if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')) {
                 if (start == -1) // Word start
                     start = end;
                 // Word end => reserve word: start..end
