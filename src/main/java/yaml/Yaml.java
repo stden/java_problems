@@ -60,17 +60,17 @@ public class Yaml<T> {
         try (Scanner sc = new Scanner(new File(fileName), "UTF-8")) {
             sc.useLocale(Locale.ENGLISH);
             if (cls.equals(Byte.class))
-                return (T) new Byte(sc.nextByte());
+                return (T) Byte.valueOf(sc.nextByte());
             if (cls.equals(Short.class))
-                return (T) new Short(sc.nextShort());
+                return (T) Short.valueOf(sc.nextShort());
             if (cls.equals(Integer.class))
-                return (T) new Integer(sc.nextInt());
+                return (T) Integer.valueOf(sc.nextInt());
             if (cls.equals(Long.class))
-                return (T) new Long(sc.nextLong());
+                return (T) Long.valueOf(sc.nextLong());
             if (cls.equals(Float.class))
-                return (T) new Float(sc.nextFloat());
+                return (T) Float.valueOf(sc.nextFloat());
             if (cls.equals(Double.class))
-                return (T) new Double(sc.nextDouble());
+                return (T) Double.valueOf(sc.nextDouble());
             if (cls.equals(Character.class))
                 return (T) new Character(sc.next().charAt(0));
             if (cls.equals(Boolean.class))
