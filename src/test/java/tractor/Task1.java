@@ -13,25 +13,26 @@ package tractor;
 
 public class Task1 {
     public String solution(String S) {
-        char[] str = S.toCharArray();
-        int from = -1; // Word start
-        for (int to = 0; to < str.length; to++) {
-            char c = str[to];
+        if (S.length() <= 1) return S;
+        char[] s = S.toCharArray();
+        int N = s.length;
+        int start = -1; // Word start
+        for (int end = 0; end < N; end++) {
+            char c = s[end];
             if (c >= 'a' && c <= 'z') {
-                // Word start
-                if (from == -1)
-                    from = to;
+                if (start == -1) // Word start
+                    start = end;
                 // Word end => reserve word: start..end
-                if (to == str.length - 1 || str[to + 1] == ' ') {
-                    for (int i = from, j = to; i < j; i++, j--) {
-                        char temp = str[i];
-                        str[i] = str[j];
-                        str[j] = temp;
+                if (end == s.length - 1 || s[end + 1] == ' ') {
+                    for (int i = start, j = end; i < j; i++, j--) {
+                        char temp = s[i];
+                        s[i] = s[j];
+                        s[j] = temp;
                     }
-                    from = -1;
+                    start = -1;
                 }
             }
         }
-        return new String(str);
+        return new String(s);
     }
 }
