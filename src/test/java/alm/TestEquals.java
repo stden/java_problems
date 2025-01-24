@@ -24,7 +24,7 @@ public class TestEquals extends Assert {
     public void testLng() throws Exception {
         Long l1 = Long.valueOf(0x7F);
         Long l2 = Long.valueOf(0x7F);
-        Long l3 = new Long(0x7F);
+        Long l3 = Long.valueOf(0x7F);
         assertTrue(l1 == l2);
         assertFalse(l1 == l3);
         assertTrue(l1.equals(l2));
