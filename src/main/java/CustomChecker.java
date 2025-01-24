@@ -127,6 +127,7 @@ public class CustomChecker {
     // End of BODY
 
     // Start of TAIL
+    @SuppressWarnings("unchecked")
     static int read_input_json(final String json_file_path, TestStruct t_obj) {
         try {
             JSONParser parser = new JSONParser();
