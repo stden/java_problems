@@ -22,11 +22,11 @@ public class TestEquals extends Assert {
 
     @Test
     public void testLng() throws Exception {
-        Long l1 = Long.valueOf(0x7F);
-        Long l2 = Long.valueOf(0x7F);
-        Long l3 = Long.valueOf(0x7F);
-        assertTrue(l1 == l2);
-        assertFalse(l1 == l3);
+        Long l1 = Long.valueOf(127);
+        Long l2 = Long.valueOf(127);
+        Long l3 = new Long(127);
+        assertTrue(l1 == l2);  // Should be true due to cache
+        assertFalse(l1 == l3); // Should be false as new Long always creates new object
         assertTrue(l1.equals(l2));
         assertTrue(l1.equals(l3));
     }
