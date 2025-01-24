@@ -22,7 +22,7 @@ public class Yaml<T> {
         File file = new File(fileName);
         file.getParentFile().mkdirs();
         try (PrintWriter w = new PrintWriter(new OutputStreamWriter(new FileOutputStream(file), UTF_8))) {
-            Class cls = obj.getClass();
+            Class<?> cls = obj.getClass();
             if (cls.isPrimitive() || simpleWrite(obj))
                 w.println(obj.toString());
             else if (obj instanceof Date) {
@@ -80,7 +80,7 @@ public class Yaml<T> {
             if (cls.equals(Date.class))
                 return (T) dateTimeFormat.parse(sc.nextLine());
             if (cls.isArray()) {
-                ArrayList<String> list = new ArrayList();
+                ArrayList<String> list = new ArrayList<>();
                 while (sc.hasNext()) {
                     String s = sc.nextLine();
                     if (s.startsWith("-")) {

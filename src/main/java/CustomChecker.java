@@ -140,7 +140,8 @@ public class CustomChecker {
 
             JSONArray metadata_file_path_node = (JSONArray) json_obj.get("metadata_file_paths");
             if (metadata_file_path_node != null && !metadata_file_path_node.isEmpty()) {
-                Iterator<String> metadata_file_paths_it = metadata_file_path_node.iterator();
+                @SuppressWarnings("unchecked")
+                Iterator<String> metadata_file_paths_it = (Iterator<String>) metadata_file_path_node.iterator();
                 while (metadata_file_paths_it.hasNext())
                     t_obj.metadata_file_paths.add(metadata_file_paths_it.next());
             }
