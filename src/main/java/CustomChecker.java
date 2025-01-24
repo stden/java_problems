@@ -138,9 +138,10 @@ public class CustomChecker {
             t_obj.testcase_output_path = (String) json_obj.get("output_file_path");
             t_obj.testcase_expected_output_path = (String) json_obj.get("expected_output_file_path");
 
-            JSONArray<String> metadata_file_path_node = (JSONArray<String>) json_obj.get("metadata_file_paths");
+            JSONArray metadata_file_path_node = (JSONArray) json_obj.get("metadata_file_paths");
             if (metadata_file_path_node != null && !metadata_file_path_node.isEmpty()) {
-                Iterator<String> metadata_file_paths_it = metadata_file_path_node.iterator();
+                @SuppressWarnings("unchecked")
+                Iterator<String> metadata_file_paths_it = (Iterator<String>) metadata_file_path_node.iterator();
                 while (metadata_file_paths_it.hasNext())
                     t_obj.metadata_file_paths.add(metadata_file_paths_it.next());
             }
