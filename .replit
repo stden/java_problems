@@ -1,0 +1,8 @@
+modules = ["java-graalvm22.3"]
+run = "mvn clean test"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "mvn clean test"]
